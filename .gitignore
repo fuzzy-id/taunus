@@ -4,5 +4,12 @@
 # ignore egg stuff
 taunus.egg-info
 
+############################################################
+# Ignores related to my developing environment             #
+############################################################
+
 # ignore emacs backups
 *~
+
+# ignore rope stuff
+.ropeproject/
