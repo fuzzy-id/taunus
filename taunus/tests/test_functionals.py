@@ -15,7 +15,7 @@ class FunctionalTests(unittest.TestCase):
     def setUp(self):
         self.test_dir = tempfile.mkdtemp()
         import taunus
-        app = taunus.main({'root': test_dir, })
+        app = taunus.main({'root': self.test_dir, })
         self.app = TestApp(app)
 
     def tearDown(self):
