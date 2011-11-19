@@ -13,3 +13,6 @@ taunus.egg-info
 
 # ignore rope stuff
 .ropeproject/
+
+# nose coverage file
+.coverage
