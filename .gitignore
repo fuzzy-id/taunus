@@ -1,1 +1,5 @@
+# ignore egg stuff
 taunus.egg-info
+
+# ignore emacs backups
+*~
