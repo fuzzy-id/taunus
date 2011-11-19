@@ -1,0 +1,15 @@
+* Taunus – Your access to your disk… For free!
+
+This is Taunus! Taunus is supposed to be a small application working
+on top of Pyramid[fn:1], granting you access on your file system in
+order to make sharing in LANs a bit easier and to learn a bit more
+about the Pyramid framework (one could also say that the latter is the
+aim topic).
+
+** Current supported features
+
+None, er, this is not working at all, at the moment!
+
+* Footnotes
+
+[fn:1] http://www.pylonsproject.com
