@@ -13,13 +13,13 @@ class ApplicationStartupTests(unittest.TestCase):
 class FunctionalTests(unittest.TestCase):
     
     def setUp(self):
-        test_dir = tempfile.mkdtemp()
+        self.test_dir = tempfile.mkdtemp()
         import taunus
         app = taunus.main({'root': test_dir, })
         self.app = TestApp(app)
 
     def tearDown(self):
-        shutil.rmtree(test_dir)
+        shutil.rmtree(self.test_dir)
 
     def test_view_root(self):
         pass
