@@ -51,11 +51,6 @@ class AccessTests(unittest.TestCase):
     def test_accessing_non_existing_path_is_forbidden(self):
         self.app.get('/non/existing/path', status=404)
 
-    def test_symbolic_link_does_not_show_up_in_listing(self):
-        os.symlink('/', os.path.join(self.test_dir, 'symlink'))
-        resp = self.app.get('/')
-        self.assertNotIn('symlink', resp.body)
-
     def test_accessing_dot_dot_results_in_root(self):
         resp = self.app.get('/')
         self.assertIn('<title>Taunus - /</title>', resp.body)
@@ -80,6 +75,22 @@ class AppearenceTests(unittest.TestCase):
         resp = self.app.get('/')
         self.assertIn('foo', resp.body)
 
+    def test_dot_file_is_hidden(self):
+        with open(os.path.join(self.test_dir, '.some_dot_file'), 'w'):
+            pass
+        resp = self.app.get('/')
+        self.assertNotIn('.some_dot_file', resp.body)
+
+    def test_symbolic_link_is_hidden(self):
+        os.symlink('/', os.path.join(self.test_dir, 'symlink'))
+        resp = self.app.get('/')
+        self.assertNotIn('symlink', resp.body)
+
+    def test_subdir_shows_up(self):
+        os.mkdir(os.path.join(self.test_dir, 'somedir'))
+        resp = self.app.get('/')
+        self.assertIn('/somedir', resp.body)
+
     def test_subdir_is_accessible(self):
         os.mkdir(os.path.join(self.test_dir, 'somedir'))
         resp = self.app.get('/somedir')
@@ -92,4 +103,3 @@ class AppearenceTests(unittest.TestCase):
             pass
         resp = self.app.get('/somedir')
         self.assertIn('file_in_somedir', resp.body)
-
