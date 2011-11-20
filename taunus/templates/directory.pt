@@ -5,13 +5,13 @@
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="${request.static_path('taunus:static/html5reset-1.6.1.css')}"/>
     <link rel="stylesheet" href="${request.static_path('taunus:static/fuzzy-id.css')}"/>
-    <title>Taunus - ${directory}</title>
+    <title>Taunus - ${directory.path}</title>
   </head>
   <body>
     <header class="container">
       <hgroup>
 	<h1>Taunus</h1>
-	<h2>Current directory: ${directory}</h2>
+	<h2>Current directory: ${directory.path}</h2>
       </hgroup>
     </header>
     <div class="content">
@@ -20,7 +20,7 @@
 	  <th>File</th>
 	</tr>
 	<tr tal:repeat="item listing">
-	  <td>${structure:item}</td>
+	  <td><a href="${item.path}">${item}</a></td>
 	</tr>
       </table>
     </div>
