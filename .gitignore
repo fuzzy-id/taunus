@@ -4,6 +4,10 @@
 # ignore egg stuff
 taunus.egg-info
 
+# ignore actual ini files
+developement.ini
+production.ini
+
 ############################################################
 # Ignores related to my developing environment             #
 ############################################################
