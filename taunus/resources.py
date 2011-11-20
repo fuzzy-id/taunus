@@ -12,10 +12,10 @@ class RootDirFactory(object):
         return Directory(cls._default_root)
 
     @classmethod
-    def set_default_root(cls, root_dir):
-        if not os.path.isdir(root_dir):
-            raise IOError("Couldn't find root dir '%s'." % root_dir)
-
+    def set_default_root(cls, default_root):
+        if not os.path.isdir(default_root):
+            raise IOError("Couldn't find root dir '%s'." % default_root)
+        cls._default_root = default_root
 
 class Directory(object):
 
