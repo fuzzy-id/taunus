@@ -8,7 +8,7 @@ import os
 
 class ApplicationStartupTests(unittest.TestCase):
     
-    def test_unexistent_directory_raises_error_test(self):
+    def test_init_with_unexistent_default_root_raises_error(self):
         with self.assertRaises(IOError):
             app = taunus.main({}, default_root='/non/existing/path/')
 
