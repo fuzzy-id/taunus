@@ -60,7 +60,7 @@ class AccessTests(unittest.TestCase):
         resp = self.app.get('/')
         self.assertIn('<title>Taunus - /</title>', resp.body)
 
-class BaseTests(unittest.TestCase):
+class AppearenceTests(unittest.TestCase):
     
     def setUp(self):
         self.test_dir = tempfile.mkdtemp()
