@@ -33,11 +33,7 @@ class ApplicationStartupTests(unittest.TestCase):
 
     def test_vanished_default_root_raises_error(self):
         test_dir = tempfile.mkdtemp()
-        try:
-            app = TestApp(taunus.main({}, default_root=test_dir))
-        except Exception as e:
-            shutil.rmtree(test_dir)
-            raise e
+        app = TestApp(taunus.main({}, default_root=test_dir))
         shutil.rmtree(test_dir)
         with self.assertRaises(ValueError):
             app.get('/')
@@ -60,6 +56,10 @@ class AccessTests(unittest.TestCase):
         resp = self.app.get('/')
         self.assertNotIn('symlink', resp.body)
 
+    def test_accessing_dot_dot_results_in_root(self):
+        resp = self.app.get('/')
+        self.assertIn('<title>Taunus - /</title>', resp.body)
+
 class BaseTests(unittest.TestCase):
     
     def setUp(self):
@@ -79,3 +79,17 @@ class BaseTests(unittest.TestCase):
             pass
         resp = self.app.get('/')
         self.assertIn('foo', resp.body)
+
+    def test_subdir_is_accessible(self):
+        os.mkdir(os.path.join(self.test_dir, 'somedir'))
+        resp = self.app.get('/somedir')
+        self.assertIn('Taunus - /somedir', resp.body)
+
+    def test_file_in_subdir_shows_up(self):
+        somedir = os.path.join(self.test_dir, 'somedir')
+        os.mkdir(somedir)
+        with open(os.path.join(somedir, 'file_in_somedir'), 'w'):
+            pass
+        resp = self.app.get('/somedir')
+        self.assertIn('file_in_somedir', resp.body)
+
