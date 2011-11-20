@@ -19,7 +19,7 @@
 	<tr> 
 	  <th>File</th>
 	</tr>
-	<tr tal:repeat="item directory">
+	<tr tal:repeat="item listing">
 	  <td>${item}</td>
 	</tr>
       </table>
