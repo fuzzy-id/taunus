@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from pyramid.httpexceptions import HTTPForbidden
 import os
 
 class RootDirFactory(object):
@@ -34,7 +35,7 @@ class Directory(object):
     def __str__(self):
         if self.__parent__ is None:
             return '/'
-        return '/'.join([self.__parent__, self.__name__])
+        return '%s%s/' % (str(self.__parent__), self.__name__)
 
     def full_path(self):
         if self.__parent__ is None:
@@ -50,6 +51,13 @@ class Directory(object):
                 if p_valid_entry(os.path.join(full_path, item)):
                     yield item
         return directory_listing()
+
+    def __getitem__(self, entry):
+        if os.path.isdir(os.path.join(self.full_path(), entry)):
+            child_dir = Directory(entry)
+            child_dir.__parent__ = self
+            return child_dir
+        raise KeyError()
 
 def p_valid_entry(entry_path):
     if os.path.islink(entry_path):
