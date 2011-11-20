@@ -15,11 +15,6 @@ class ApplicationStartupTests(unittest.TestCase):
         with self.assertRaises(IOError):
             app = taunus.main({}, default_root='/non/existing/path/')
 
-    def test_app_is_initialized_via_home(self):
-        app = TestApp(taunus.main({}))
-        resp = app.get('/')
-        self.assertIn(os.environ['HOME'], resp.body)
-
 class FunctionalTests(unittest.TestCase):
     
     def setUp(self):
