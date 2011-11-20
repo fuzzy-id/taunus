@@ -14,13 +14,15 @@
 	<h2>Current directory: ${directory}</h2>
       </hgroup>
     </header>
-    <table>
-      <tr>
-	<th>File</th>
-      </tr>
-      <tr tal:repeat="item directory">
-	<td>${item}</td>
-      </tr>
-    </table>
+    <div class="content">
+      <table class="container">
+	<tr> 
+	  <th>File</th>
+	</tr>
+	<tr tal:repeat="item directory">
+	  <td>${item}</td>
+	</tr>
+      </table>
+    </div>
   </body>
 </html>
