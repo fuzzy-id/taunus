@@ -1,10 +1,12 @@
-import unittest
-import tempfile
-import shutil
-from webtest import TestApp
-import taunus
-import pprint
 import os
+import shutil
+import tempfile
+import unittest
+
+from webtest import TestApp
+
+import taunus
+
 
 class ApplicationStartupTests(unittest.TestCase):
     
