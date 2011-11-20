@@ -1,6 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<html lang="en" 
+      xmlns:tal="http://xml.zope.org/namespaces/tal">
   <head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="${request.static_path('wp_frontend:static/html5reset-1.6.1.css')}"/>
     <title>Taunus - ${directory}</title>
   </head>
+  <body>
+    <table>
+      <tr>
+	<th>File</th>
+      </tr>
+      <tr tal:repeat="item directory">
+	<td>${item}</td>
+      </tr>
+    </table>
+  </body>
 </html>
