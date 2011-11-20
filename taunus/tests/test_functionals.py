@@ -30,3 +30,9 @@ class FunctionalTests(unittest.TestCase):
     def test_setting_default_dir_works(self):
         resp = self.app.get('/')
         self.assertIn(self.test_dir, resp.body)
+
+    def test_files_in_dir_are_listed(self):
+        with open(os.path.join(self.test_dir, 'foo'), 'w'):
+            pass
+        resp = self.app.get('/')
+        self.assertIn('foo', resp.body)
