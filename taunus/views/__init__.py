@@ -26,3 +26,11 @@ def view_directory(context, request):
              renderer='taunus:templates/file.pt')
 def view_text_file(context, request):
     return {'resource': context, }
+
+from pyramid.response import Response
+
+@view_config(context='taunus.resources.StdFile')
+def serve_file(context, request):
+    response = Response(content_type=context.mime)
+    response.app_iter = open(context.full_path(), 'rb')
+    return response
