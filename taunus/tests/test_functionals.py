@@ -47,6 +47,11 @@ class AccessTests(unittest.TestCase):
     def test_accessing_non_existing_path_is_forbidden(self):
         self.app.get('/non/existing/path', status=404)
 
+    def test_symbolic_link_does_not_show_up_in_listing(self):
+        os.symlink('/', os.path.join(self.test_dir, 'symlink'))
+        resp = self.app.get('/')
+        self.assertNotIn('symlink', resp.body)
+
 class BaseTests(unittest.TestCase):
     
     def setUp(self):
