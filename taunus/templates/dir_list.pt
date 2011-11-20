@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
   <head>
-    <title>Taunus – ${dir}</title>
+    <title>Taunus - ${directory}</title>
   </head>
 </html>
