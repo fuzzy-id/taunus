@@ -18,9 +18,6 @@ class ListingEntry(object):
 @view_config(context='taunus.resources.Directory',
              renderer='taunus:templates/directory.pt')
 def view_directory(context, request):
-
-    listing = [ ListingEntry(entry, request)
-                for entry in context ] 
-
     return {'directory': context,
-            'listing': listing, }
+            'listing': ( ListingEntry(entry, request)
+                         for entry in context ), }
