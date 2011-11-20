@@ -18,6 +18,11 @@ class ListingEntry(object):
 @view_config(context='taunus.resources.Directory',
              renderer='taunus:templates/directory.pt')
 def view_directory(context, request):
-    return {'directory': context,
+    return {'resource': context,
             'listing': ( ListingEntry(entry, request)
                          for entry in context ), }
+
+@view_config(context='taunus.resources.TextFile',
+             renderer='taunus:templates/file.pt')
+def view_directory(context, request):
+    return {'resource': context }
