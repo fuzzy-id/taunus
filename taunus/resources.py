@@ -67,14 +67,14 @@ class Directory(BaseFSObject):
             return cls(self, entry)
 
     def get_entry_type(self, entry):
-        if entry not in os.listdir(self.full_path()):
-            return None
         entry_path = os.path.join(self.full_path(), entry)
         if not is_valid_entry(entry_path):
             return None
         elif os.path.isdir(entry_path):
             return Directory
-        return FileFactory
+        elif os.path.isfile(entry_path):
+            return FileFactory
+        return None
 
 class RootDirectory(Directory):
 
@@ -94,8 +94,11 @@ class FileFactory(BaseFSObject):
     def __new__(cls, parent, name):
         mime = magic.from_file(os.path.join(parent.full_path(), name), mime=True)
         if cls.text_re.match(mime) is not None:
-            return TextFile(parent, name)
-        return StdFile(parent, name)
+            f = TextFile(parent, name)
+        else:
+            f = StdFile(parent, name)
+        f.mime = mime
+        return f
 
 class StdFile(BaseFSObject):
 
