@@ -11,9 +11,17 @@ import taunus
 
 class ApplicationStartupTests(unittest.TestCase):
     
+    def test_missing_default_root_raises_error(self):
+        with self.assertRaises(KeyError):
+            app = taunus.main({})
+
     def test_init_with_unexistent_default_root_raises_error(self):
-        with self.assertRaises(IOError):
+        with self.assertRaises(ValueError):
             app = taunus.main({}, default_root='/non/existing/path/')
+
+    def test_default_root_not_absolute_raises_error(self):
+        with self.assertRaises(ValueError):
+            app = taunus.main({}, default_root='~')
 
 class FunctionalTests(unittest.TestCase):
     
