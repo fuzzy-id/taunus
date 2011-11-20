@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from pyramid.httpexceptions import HTTPForbidden
 import os
+import re
 
 class RootDirFactory(object):
     
@@ -26,11 +27,12 @@ class RootDirFactory(object):
 
 class Directory(object):
 
-    def __init__(self, dir):
-        self.__name__ = dir
+    def __init__(self, parent, name):
+        self.__parent__ = parent
+        self.__name__ = name
 
     def __str__(self):
-        return '%s%s/' % (str(self.__parent__), self.__name__)
+        return self.__name__
 
     def full_path(self):
         return '/'.join([self.__parent__.full_path(), self.__name__])
@@ -41,16 +43,24 @@ class Directory(object):
         listing.sort()
         def directory_listing():
             for item in listing:
-                if p_valid_entry(os.path.join(full_path, item)):
-                    yield item
+                cls = self.get_entry_type(item)
+                if cls is not None:
+                    yield cls(self, item)
         return directory_listing()
 
     def __getitem__(self, entry):
-        if os.path.isdir(os.path.join(self.full_path(), entry)):
-            child_dir = Directory(entry)
-            child_dir.__parent__ = self
-            return child_dir
+        cls = self.get_entry_type(entry)
+        if cls is not None:
+            return cls(self, entry)
         raise KeyError()
+
+    def get_entry_type(self, entry):
+        entry_path = os.path.join(self.full_path(), entry)
+        if not is_valid_entry(entry_path):
+            return None
+        elif os.path.isdir(entry_path):
+            return Directory
+        return File
 
 class RootDirectory(Directory):
 
@@ -66,7 +76,19 @@ class RootDirectory(Directory):
     def full_path(self):
         return self.__path__
 
-def p_valid_entry(entry_path):
+class File(object):
+    
+    def __init__(self, parent, name):
+        self.__name__ = name
+        self.__parent__ = parent
+
+    def __str__(self):
+        return self.__name__
+
+dotfile_re = re.compile(r'^\.([^.]|\..+)')
+def is_valid_entry(entry_path):
     if os.path.islink(entry_path):
+        return False
+    if dotfile_re.match(os.path.basename(entry_path)) is not None:
         return False
     return True
