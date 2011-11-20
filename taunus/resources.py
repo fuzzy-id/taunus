@@ -90,11 +90,14 @@ class RootDirectory(Directory):
 class FileFactory(BaseFSObject):
 
     text_re = re.compile('^text/')
+    video_re = re.compile('^video/')
 
     def __new__(cls, parent, name):
         mime = magic.from_file(os.path.join(parent.full_path(), name), mime=True)
         if cls.text_re.match(mime) is not None:
             f = TextFile(parent, name)
+        elif cls.video_re.match(mime) is not None:
+            f = VideoFile(parent, name)
         else:
             f = StdFile(parent, name)
         f.mime = mime
@@ -110,6 +113,10 @@ class TextFile(BaseFSObject):
     def content(self):
         with open(self.full_path()) as f:
             return '\n'.join(f.readlines())
+
+class VideoFile(BaseFSObject):
+
+    pass
 
 dotfile_re = re.compile(r'^\.([^.]|\..+)')
 def is_valid_entry(entry_path):
