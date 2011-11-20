@@ -8,6 +8,10 @@ pyramid.debug_routematch = false
 pyramid.debug_templates = false
 pyramid.default_locale_name = en
 
+# default_root should be a absolute pathe to a directory
+# (not a link!)
+default_root = /some/abs/path
+
 [server:main]
 use = egg:Paste#http
 host = 0.0.0.0
