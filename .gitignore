@@ -5,7 +5,7 @@
 taunus.egg-info
 
 # ignore actual ini files
-developement.ini
+development.ini
 production.ini
 
 ############################################################
