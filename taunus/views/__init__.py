@@ -24,5 +24,5 @@ def view_directory(context, request):
 
 @view_config(context='taunus.resources.TextFile',
              renderer='taunus:templates/file.pt')
-def view_directory(context, request):
-    return {'resource': context }
+def view_text_file(context, request):
+    return {'resource': context, }
