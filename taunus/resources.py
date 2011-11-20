@@ -8,7 +8,7 @@ class RootDirFactory(object):
 
     def __new__(cls, request):
         cls._validate_root()
-        return Directory(cls._default_root)
+        return RootDirectory(cls._default_root)
 
     @classmethod
     def validate_and_set_default_root(cls, default_root):
@@ -26,20 +26,13 @@ class RootDirFactory(object):
 
 class Directory(object):
 
-    __name__ = None
-    __parent__ = None
-
     def __init__(self, dir):
         self.__name__ = dir
 
     def __str__(self):
-        if self.__parent__ is None:
-            return '/'
         return '%s%s/' % (str(self.__parent__), self.__name__)
 
     def full_path(self):
-        if self.__parent__ is None:
-            return self.__name__
         return '/'.join([self.__parent__.full_path(), self.__name__])
 
     def __iter__(self):
@@ -58,6 +51,20 @@ class Directory(object):
             child_dir.__parent__ = self
             return child_dir
         raise KeyError()
+
+class RootDirectory(Directory):
+
+    __name__ = ''
+    __parent__ = None
+
+    def __init__(self, path):
+        self.__path__ = path
+
+    def __str__(self):
+        return '/'
+
+    def full_path(self):
+        return self.__path__
 
 def p_valid_entry(entry_path):
     if os.path.islink(entry_path):
