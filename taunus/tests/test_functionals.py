@@ -23,6 +23,14 @@ class ApplicationStartupTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             app = taunus.main({}, default_root='~')
 
+    def test_default_root_is_symlink_raises_error(self):
+        os.symlink('/', '/tmp/foo')
+        try:
+            with self.assertRaises(ValueError):
+                app = taunus.main({}, default_root='/tmp/foo')
+        finally:
+            os.remove('/tmp/foo')
+
     def test_vanished_default_root_raises_error(self):
         test_dir = tempfile.mkdtemp()
         try:
@@ -64,7 +72,7 @@ class BaseTests(unittest.TestCase):
 
     def test_directory_is_represented_as_root(self):
         resp = self.app.get('/')
-        self.assertIn(' / ', resp.body)
+        self.assertIn('Taunus - /', resp.body)
 
     def test_existing_file_in_dir_is_listed(self):
         with open(os.path.join(self.test_dir, 'foo'), 'w'):
