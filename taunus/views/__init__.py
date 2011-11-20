@@ -13,7 +13,7 @@ class ListingEntry(object):
 
     @property
     def path(self):
-        self.entry.path
+        return self.entry.path
 
 @view_config(context='taunus.resources.Directory',
              renderer='taunus:templates/directory.pt')
