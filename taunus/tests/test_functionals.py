@@ -69,6 +69,10 @@ class DirectoryTests(unittest.TestCase):
         resp = self.app.get('/')
         self.assertIn('Taunus - /', resp.body)
 
+    def test_dot_dot_is_listed(self):
+        res = self.app.get('/')
+        self.assertIn('..', res.body)
+
     def test_existing_file_in_dir_is_listed(self):
         with open(os.path.join(self.test_dir, 'foo'), 'w'):
             pass
