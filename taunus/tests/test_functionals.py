@@ -23,7 +23,31 @@ class ApplicationStartupTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             app = taunus.main({}, default_root='~')
 
-class FunctionalTests(unittest.TestCase):
+    def test_vanished_default_root_raises_error(self):
+        test_dir = tempfile.mkdtemp()
+        try:
+            app = TestApp(taunus.main({}, default_root=test_dir))
+        except Exception as e:
+            shutil.rmtree(test_dir)
+            raise e
+        shutil.rmtree(test_dir)
+        with self.assertRaises(IOError):
+            app.get('/')
+        
+class AccessTests(unittest.TestCase):
+
+    def setUp(self):
+        self.test_dir = tempfile.mkdtemp()
+        app = taunus.main({}, default_root=self.test_dir)
+        self.app = TestApp(app)
+
+    def tearDown(self):
+        shutil.rmtree(self.test_dir)
+
+    def test_accessing_non_existing_path_is_forbidden(self):
+        self.app.get('/non/existing/path', status=404)
+
+class BaseTests(unittest.TestCase):
     
     def setUp(self):
         self.test_dir = tempfile.mkdtemp()
@@ -33,11 +57,11 @@ class FunctionalTests(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(self.test_dir)
 
-    def test_setting_default_dir_works(self):
+    def test_directory_is_represented_as_root(self):
         resp = self.app.get('/')
-        self.assertIn(self.test_dir, resp.body)
+        self.assertIn(' / ', resp.body)
 
-    def test_files_in_dir_are_listed(self):
+    def test_existing_file_in_dir_is_listed(self):
         with open(os.path.join(self.test_dir, 'foo'), 'w'):
             pass
         resp = self.app.get('/')
