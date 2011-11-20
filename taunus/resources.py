@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from pyramid.httpexceptions import HTTPForbidden
-from pyramid.traversal import resource_path
 import os
 import re
+
+from pyramid.traversal import resource_path
+
 
 class RootDirFactory(object):
     
