@@ -15,6 +15,7 @@
       </hgroup>
     </header>
     <section class="container">
+      ${resource.content}
     </section>
   </body>
 </html>
