@@ -31,7 +31,7 @@ class ApplicationStartupTests(unittest.TestCase):
             shutil.rmtree(test_dir)
             raise e
         shutil.rmtree(test_dir)
-        with self.assertRaises(IOError):
+        with self.assertRaises(ValueError):
             app.get('/')
         
 class AccessTests(unittest.TestCase):
