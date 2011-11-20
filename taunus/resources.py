@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from pyramid.httpexceptions import HTTPForbidden
+from pyramid.traversal import resource_path
 import os
 import re
 
@@ -25,8 +26,11 @@ class RootDirFactory(object):
         elif os.path.islink(cls._default_root):
             raise ValueError("%s is a symlink. Exiting!" % cls._default_root)
 
-class Directory(object):
-
+class BaseFSObject(object):
+    """
+    Defines properties and functions that all objects in the
+    file system will share.
+    """
     def __init__(self, parent, name):
         self.__parent__ = parent
         self.__name__ = name
@@ -36,6 +40,12 @@ class Directory(object):
 
     def full_path(self):
         return '/'.join([self.__parent__.full_path(), self.__name__])
+
+    @property
+    def path(self):
+        return resource_path(self)
+        
+class Directory(BaseFSObject):
 
     def __iter__(self):
         full_path = self.full_path()
@@ -76,14 +86,9 @@ class RootDirectory(Directory):
     def full_path(self):
         return self.__path__
 
-class File(object):
+class File(BaseFSObject):
     
-    def __init__(self, parent, name):
-        self.__name__ = name
-        self.__parent__ = parent
-
-    def __str__(self):
-        return self.__name__
+    pass
 
 dotfile_re = re.compile(r'^\.([^.]|\..+)')
 def is_valid_entry(entry_path):
