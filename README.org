@@ -31,7 +31,7 @@ simply won't show up, in the latter they will.
 When the user browses to a file that is not a directory different
 actions will happen, depending on the type of the file:
 + videos :: there should appear a nice interface to be able to watch
-            this interface (using HTML5 kicks as, ey?).
+            this video (using HTML5 kicks as, ey?).
 + text :: list the file
 
 That's it, I haven't thought about different file types, yet.
