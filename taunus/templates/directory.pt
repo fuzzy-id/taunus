@@ -20,7 +20,7 @@
 	  <th>File</th>
 	</tr>
 	<tr tal:repeat="item listing">
-	  <td>${item}</td>
+	  <td>${structure:item}</td>
 	</tr>
       </table>
     </div>
