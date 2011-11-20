@@ -64,7 +64,6 @@ class Directory(BaseFSObject):
         cls = self.get_entry_type(entry)
         if cls is not None:
             return cls(self, entry)
-        raise KeyError()
 
     def get_entry_type(self, entry):
         entry_path = os.path.join(self.full_path(), entry)
@@ -81,9 +80,6 @@ class RootDirectory(Directory):
 
     def __init__(self, path):
         self.__path__ = path
-
-    def __str__(self):
-        return '/'
 
     def full_path(self):
         return self.__path__
