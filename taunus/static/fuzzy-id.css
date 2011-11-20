@@ -1,0 +1,102 @@
+/* General layout */
+body {
+    background: black;
+    margin: 2pt auto;
+}
+.container {
+    background: #2f2f2f;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #b2b2b2;
+    color: #b2b2b2;
+}
+.container h1 {
+    color: #f2f2b2;
+}
+
+/* links that are in a container */
+li.container {
+    margin: 4px;
+    padding: 4px;
+}
+li.container > :visited, li.container > :link {
+    color: #e2e2b2;
+    font-weight: bold;
+    font-family: sans-serife;
+}
+li.container > :hover {
+    background: #1f1f1f;
+    color: #b2e2e2;
+}
+
+/* designing the navigation bar */
+nav li.container {
+    display: inline;
+    background: #1f1f1f;
+}
+
+/* designing the content area */
+.content .main {
+    margin-left: 350px;
+}
+/* the side bar */
+.content aside {
+    float: left;
+    width: 300px;
+}
+.content th {
+    padding: 5px;
+}
+.content td {
+    padding: 5px;
+    color: #f2b2b2;
+    font-family: monospace;
+}
+.content aside td.key {
+    color: #b2c2f2;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* the footer */
+footer {
+    clear: both;
+}
+
+/* framework specific stuff */
+form.deform {
+    max-width: 270px;
+    background: #2f2f2f;
+    color: #b2b2b2;
+}
+aside form.deform {
+    margin: 2px auto;
+}
+
+/* page specific stuff */
+body {
+    max-width: 1150px;
+}
+nav ul {
+    margin: 4px auto;
+}
+.plot > img {
+    max-width: 100%;
+}
+.content {
+    overflow: visible;
+}
+/* This is for the "Home" site. */
+#homediag{
+    position:relative;
+}
+#homediag > img {
+    width: 100%;
+}
+.homeval > span {
+    position: absolute;
+    font-size: 12px;
+}
+.homeval > span#black { color: black; }
+.homeval > span#blue  { color: blue;  }
+.homeval > span#red   { color: red;   }
