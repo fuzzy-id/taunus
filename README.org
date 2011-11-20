@@ -1,14 +1,44 @@
-* Taunus – Your access to your disk… For free!
+* Taunus – Your access to your disk… Via HTTP… For free!
 
 This is Taunus! Taunus is supposed to be a small application working
-on top of Pyramid[fn:1], granting you access on your file system in
-order to make sharing in LANs a bit easier and to learn a bit more
-about the Pyramid framework (one could also say that the latter is the
-aim topic).
+on top of Pyramid[fn:1], granting you access on your file system via
+HTTP in order to make file sharing in LANs a bit easier and to learn a
+bit more about the Pyramid framework (one could also say that the
+latter is the main goal).
 
 ** Current supported features
 
 None, er, this is not working at all, at the moment!
+
+** Features that will come in The Future[tm]
+
+Well this morning, while lying around in my bed, I thought about the
+things that this application should do. As always this one is supposed
+to be the killer app that blows off your head because it is so
+awesome! So read this carefully!
+
+The main goal is to be able to view the file hierarchy via a web
+browser. Choosing a root directory will be crucial for this
+application!  You cannot start this application without giving it a
+root directory (all hail security!). 
+
+The user on the other end at the browser can browse (who would have
+thought it!) through all the file system hierarchy parting from that
+root directory. But, he won't be able to get out of it, unless you
+grant it via a configuration option. In the first case symbolic links
+simply won't show up, in the latter they will. 
+
+When the user browses to a file that is not a directory different
+actions will happen, depending on the type of the file:
++ videos :: there should appear a nice interface to be able to watch
+            this interface (using HTML5 kicks as, ey?).
++ text :: list the file
+
+That's it, I haven't thought about different file types, yet.
+
+To implement all this stuff is the primary goal. Later on there will
+also be authorisation and a root directory that can be chosen on a
+per user base.
 
 * Footnotes
 
