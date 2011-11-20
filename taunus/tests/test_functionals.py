@@ -55,7 +55,7 @@ class AccessTests(unittest.TestCase):
         resp = self.app.get('/')
         self.assertIn('<title>Taunus - /</title>', resp.body)
 
-class AppearenceTests(unittest.TestCase):
+class DirectoryTests(unittest.TestCase):
     
     def setUp(self):
         self.test_dir = tempfile.mkdtemp()
