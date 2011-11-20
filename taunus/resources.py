@@ -27,3 +27,10 @@ class Directory(object):
 
     def __str__(self):
         return self.__name__
+
+    def __iter__(self):
+        listing = [ x for x in os.listdir(self.__name__) ]
+        listing.sort()
+        for entry in listing:
+            if os.path.isdir(entry):
+                pass
