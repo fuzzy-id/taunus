@@ -16,12 +16,12 @@ class RootDirFactory(object):
 
     @classmethod
     def _validate_root(cls):
-        if not os.path.isdir(cls._default_root):
+        if not os.path.isabs(cls._default_root):
+            raise ValueError("%s is not absolute!" % cls._default_root)
+        elif not os.path.isdir(cls._default_root):
             raise ValueError("No such dir: %s" % cls._default_root)
         elif os.path.islink(cls._default_root):
             raise ValueError("%s is a symlink. Exiting!" % cls._default_root)
-        elif not os.path.abspath(cls._default_root):
-            raise ValueError("%s is not absolute!" % cls._default_root)
 
 class Directory(object):
 
