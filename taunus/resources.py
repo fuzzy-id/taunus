@@ -104,7 +104,6 @@ class FileFactory(BaseFSObject):
         return f
 
 class StdFile(BaseFSObject):
-
     pass
 
 class TextFile(BaseFSObject):
@@ -116,7 +115,11 @@ class TextFile(BaseFSObject):
 
 class VideoFile(BaseFSObject):
 
-    pass
+    codecs = {'video/x-matroska': 'theora, vorbis', }
+
+    @property
+    def type_tag(self):
+        return '%s; codecs="%s"' % (self.mime, self.codecs[self.mime])
 
 dotfile_re = re.compile(r'^\.([^.]|\..+)')
 def is_valid_entry(entry_path):
