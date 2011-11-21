@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+from pyramid.response import Response
 from pyramid.view import view_config
-import os.path
+
 
 class ListingEntry(object):
     
@@ -27,7 +28,17 @@ def view_directory(context, request):
 def view_text_file(context, request):
     return {'resource': context, }
 
-from pyramid.response import Response
+@view_config(context='taunus.resources.VideoFile',
+             renderer='taunus:templates/video.pt')
+def view_video(context, request):
+    video_path = request.resource_url(context, 'actual')
+    return {'resource': context, 
+            'video_path': video_path, }
+
+@view_config(name='actual', context='taunus.resources.VideoFile')
+def serve_video(context, request):
+    print 'foo'
+    return serve_file(context, request)
 
 @view_config(context='taunus.resources.StdFile')
 def serve_file(context, request):
