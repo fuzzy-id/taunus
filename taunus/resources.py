@@ -96,8 +96,6 @@ class FileFactory(BaseFSObject):
         mime = magic.from_file(os.path.join(parent.full_path(), name), mime=True)
         if cls.text_re.match(mime) is not None:
             f = TextFile(parent, name)
-        elif cls.video_re.match(mime) is not None:
-            f = VideoFile(parent, name)
         else:
             f = StdFile(parent, name)
         f.mime = mime
