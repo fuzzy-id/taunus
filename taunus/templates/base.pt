@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns:tal="http://xml.zope.org/namespaces/tal">
+  <head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="${request.static_path('taunus:static/all.css')}"/>
+    <title>
+    </title>	
+  </head>
+  <body>
+  </body>
+</html>
