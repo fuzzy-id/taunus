@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" 
-      xmlns:tal="http://xml.zope.org/namespaces/tal">
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal">
   <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="${request.static_path('taunus:static/all.css')}"/>
-    <title>
-    </title>	
+    <tal:block metal:define-slot="title">
+    </tal:block>
   </head>
   <body>
+    <tal:block metal:define-slot="body">
+    </tal:block>
   </body>
 </html>
