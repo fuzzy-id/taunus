@@ -10,6 +10,6 @@ def main(global_config, **settings):
     config.add_static_view('static', 'taunus:static', 
                            cache_max_age=3600)
     config.add_subscriber('taunus.subscribers.add_base_template',
-                          'pyramid.events.BeforRender')
+                          'pyramid.events.BeforeRender')
     config.scan('taunus.views')
     return config.make_wsgi_app()
