@@ -5,7 +5,7 @@
   <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="${request.static_path('taunus:static/all.css')}"/>
-    <tal:block metal:define-slot="title">
+    <tal:block metal:define-slot="header-n-title">
     </tal:block>
   </head>
   <body>
