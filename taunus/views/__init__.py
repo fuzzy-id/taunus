@@ -20,8 +20,8 @@ class ListingEntry(object):
              renderer='taunus:templates/directory.pt')
 def view_directory(context, request):
     return {'resource': context,
-            'listing': ( ListingEntry(entry, request)
-                         for entry in context ), }
+            'listing': [ ListingEntry(entry, request)
+                         for entry in context ], }
 
 @view_config(context='taunus.resources.TextFile',
              renderer='taunus:templates/file.pt')
