@@ -4,9 +4,9 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal">
   <head>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="${request.static_path('taunus:static/all.css')}"/>
-    <tal:block metal:define-slot="header-and-title">
-    </tal:block>
+    <link rel="stylesheet"
+    href="${request.static_path('taunus:static/all.css')}"/>
+    <title>Taunus - ${resource.path}</title>
   </head>
   <body>
     <tal:block metal:define-slot="body">
