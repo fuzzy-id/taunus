@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+from pyramid.location import lineage
 from pyramid.response import Response
+from pyramid.traversal import resource_path
 from pyramid.view import view_config
-
 
 class ListingEntry(object):
     
@@ -21,7 +22,10 @@ class ListingEntry(object):
 def view_directory(context, request):
     return {'resource': context,
             'listing': [ ListingEntry(entry, request)
-                         for entry in context ], }
+                         for entry in context ], 
+            'root_to_resource': [ (r, resource_path(r), )
+                                  for r in reversed(
+                [ c for c in lineage(context) ]) ], }
 
 @view_config(context='taunus.resources.TextFile',
              renderer='taunus:templates/file.pt')
