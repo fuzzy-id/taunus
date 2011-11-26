@@ -27,23 +27,6 @@ def view_directory(context, request):
                                   for r in reversed(
                 [ c for c in lineage(context) ]) ], }
 
-@view_config(context='taunus.resources.TextFile',
-             renderer='taunus:templates/file.pt')
-def view_text_file(context, request):
-    return {'resource': context, }
-
-@view_config(context='taunus.resources.VideoFile',
-             renderer='taunus:templates/video.pt')
-def view_video(context, request):
-    video_path = request.resource_url(context, 'actual')
-    return {'resource': context, 
-            'video_path': video_path, }
-
-@view_config(name='actual', context='taunus.resources.VideoFile')
-def serve_video(context, request):
-    print 'foo'
-    return serve_file(context, request)
-
 @view_config(context='taunus.resources.StdFile')
 def serve_file(context, request):
     response = Response(content_type=context.mime)
