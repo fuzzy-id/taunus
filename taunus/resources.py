@@ -107,7 +107,7 @@ class FileFactory(BaseFSObject):
 class StdFile(BaseFSObject):
     pass
 
-dotfile_re = re.compile(r'^\.([^.]|\..+)')
+dotfile_re = re.compile(r'^\..*')
 def is_valid_entry(entry_path):
     if os.path.islink(entry_path):
         return False
