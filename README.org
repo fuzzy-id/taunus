@@ -8,7 +8,15 @@ latter is the main goal).
 
 ** Current supported features
 
-None, er, this is not working at all, at the moment!
+Alright, so currently you have the possibility to surf around in your
+file system. Currently there is only the listing of all the files in
+the directory available and a nice navigation bar is shown. Things
+that will come soon is surely to show the size of the files and show
+symbols depending on what one is able to do with these files.
+
+I just did some minor changes that were mainly clean up stuff. I think
+it's better to concentrate first on a clean directory listing and
+later on start to focus on doing things with all the different files.
 
 ** Features that will come in The Future[tm]
 
@@ -32,9 +40,11 @@ When the user browses to a file that is not a directory different
 actions will happen, depending on the type of the file:
 + videos :: there should appear a nice interface to be able to watch
             this video (using HTML5 kicks as, ey?).
++ html :: choose between listing the file, to view the file in browser
+          or to download it
 + text :: list the file
 
-That's it, I haven't thought about different file types, yet.
+That's it, I haven't thought about more file types, yet.
 
 To implement all this stuff is the primary goal. Later on there will
 also be authorisation and a root directory that can be chosen on a
