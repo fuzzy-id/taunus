@@ -107,3 +107,19 @@ class DirectoryTests(unittest.TestCase):
             pass
         resp = self.app.get('/somedir')
         self.assertIn('file_in_somedir', resp.body)
+
+class FileDownloadTests(unittest.TestCase):
+    
+    def setUp(self):
+        self.test_dir = tempfile.mkdtemp()
+        app = taunus.main({}, default_root=self.test_dir)
+        self.app = TestApp(app)
+
+    def tearDown(self):
+        shutil.rmtree(self.test_dir)
+
+    def test_file_is_correctly_downloaded(self):
+        with open(os.path.join(self.test_dir, "some_file"), 'w') as f:
+            f.write('some text')
+        resp = self.app.get('/some_file')
+        self.assertIn('some text', resp.body)
