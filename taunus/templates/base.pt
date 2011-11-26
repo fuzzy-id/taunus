@@ -9,7 +9,37 @@
     <title>Taunus - ${resource.path}</title>
   </head>
   <body>
-    <tal:block metal:define-slot="body">
-    </tal:block>
+    <div class="page">
+      <header class="head">
+	<div class="mod complex flow tabs tabPosBottom">
+	  <b class="top"><b class="tl"></b><b class="tr"></b></b>
+	  <div class="inner">
+	    <div class="bd">
+	      <h1>You are here:</h1>
+	    </div> <!-- closes bd -->
+	    <nav class="hd topper">
+	      <ul class="tabControl">
+		<li tal:repeat="(item, url_to_item) root_to_resource">
+		  <a href="${url_to_item}">
+		    <span>${item}</span>
+		  </a>
+		</li>
+	      </ul> <!-- closes tabControl -->
+	    </nav> <!-- closes hd -->
+	  </div> <!-- closes inner -->
+	  <b class="bottom"><b class="bl"></b><b class="br"></b></b>
+	</div> <!-- closes mod tabs -->
+      </header> <!-- closes head -->
+      <div class="body">
+	<div class="mod complex flow">
+	  <b class="top"><b class="tl"></b><b class="tr"></b></b>
+	  <div class="inner">
+	    <tal:block metal:define-slot="body">
+	    </tal:block>
+	  </div> <!-- closes inner -->
+	  <b class="bottom"><b class="bl"></b><b class="br"></b></b>
+	</div> <!-- closes mod -->
+      </div> <!-- closes body -->
+    </div> <!-- closes page -->
   </body>
 </html>
