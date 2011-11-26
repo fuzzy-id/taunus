@@ -69,9 +69,9 @@ class DirectoryTests(unittest.TestCase):
         resp = self.app.get('/')
         self.assertIn('Taunus - /', resp.body)
 
-    def test_dot_dot_is_listed(self):
+    def test_dot_dot_is_not_listed(self):
         res = self.app.get('/')
-        self.assertIn('..', res.body)
+        self.assertNotIn('..', res.body)
 
     def test_existing_file_in_dir_is_listed(self):
         with open(os.path.join(self.test_dir, 'foo'), 'w'):
@@ -107,19 +107,3 @@ class DirectoryTests(unittest.TestCase):
             pass
         resp = self.app.get('/somedir')
         self.assertIn('file_in_somedir', resp.body)
-
-class FileTests(unittest.TestCase):
-
-    def setUp(self):
-        self.test_dir = tempfile.mkdtemp()
-        app = taunus.main({}, default_root=self.test_dir)
-        self.app = TestApp(app)
-
-    def tearDown(self):
-        shutil.rmtree(self.test_dir)
-
-    def test_file_is_listed_correctly(self):
-        with open(os.path.join(self.test_dir, "some_file"), 'w') as f:
-            f.write('some text')
-        resp = self.app.get('/some_file')
-        self.assertIn('some text', resp.body)
