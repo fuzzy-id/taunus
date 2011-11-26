@@ -107,21 +107,6 @@ class FileFactory(BaseFSObject):
 class StdFile(BaseFSObject):
     pass
 
-class TextFile(BaseFSObject):
-    
-    @property
-    def content(self):
-        with open(self.full_path()) as f:
-            return '\n'.join(f.readlines())
-
-class VideoFile(BaseFSObject):
-
-    codecs = {'video/x-matroska': 'theora, vorbis', }
-
-    @property
-    def type_tag(self):
-        return '%s; codecs="%s"' % (self.mime, self.codecs[self.mime])
-
 dotfile_re = re.compile(r'^\.([^.]|\..+)')
 def is_valid_entry(entry_path):
     if os.path.islink(entry_path):
