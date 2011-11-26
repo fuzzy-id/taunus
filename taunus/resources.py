@@ -87,6 +87,9 @@ class RootDirectory(Directory):
     def full_path(self):
         return self.__path__
 
+    def __str__(self):
+        return 'Root'
+
 class FileFactory(BaseFSObject):
 
     text_re = re.compile('^text/')
