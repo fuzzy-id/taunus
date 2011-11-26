@@ -3,19 +3,15 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       metal:use-macro="base">
   <tal:block metal:fill-slot="body">
-    <header class="container">
-      <hgroup>
-	<h1>Taunus</h1>
-	<h2>Current resource: ${resource.path}</h2>
-      </hgroup>
-    </header>
-    <table>
-      <tr> 
-	<th>File</th>
-      </tr>
-      <tr tal:repeat="item listing">
-	<td><a href="${item.path}">${item}</a></td>
-      </tr>
-    </table>
+    <div class="data spec">
+      <table>
+	<tr> 
+	  <th>File</th>
+	</tr>
+	<tr tal:repeat="item listing">
+	  <td><a href="${item.path}">${item}</a></td>
+	</tr>
+      </table>
+    </div> <!-- closes data -->
   </tal:block>
 </html>
