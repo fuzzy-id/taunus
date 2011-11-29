@@ -8,7 +8,7 @@
 	<tr> 
 	  <th>File</th>
 	</tr>
-	<tr tal:repeat="item listing">
+	<tr tal:repeat="item resource">
 	  <td><a href="${item.path}">${item}</a></td>
 	</tr>
       </table>
