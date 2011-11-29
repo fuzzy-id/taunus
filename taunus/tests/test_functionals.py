@@ -79,6 +79,12 @@ class DirectoryTests(unittest.TestCase):
         resp = self.app.get('/')
         self.assertIn('foo', resp.body)
 
+    def test_file_with_non_ascii_is_listed(self):
+        with open(os.path.join(self.test_dir, 'föh'), 'w'):
+            pass
+        resp = self.app.get('/')
+        self.assertIn('föh', resp.body)
+
     def test_dot_file_is_hidden(self):
         with open(os.path.join(self.test_dir, '.some_dot_file'), 'w'):
             pass
