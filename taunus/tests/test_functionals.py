@@ -102,6 +102,11 @@ class DirectoryTests(unittest.TestCase):
         resp = self.app.get('/')
         self.assertIn('0', resp.body)
         
+    def test_download_icon_for_file_is_listed(self):
+        with open(os.path.join(self.test_dir, 'some_file'), 'w'):
+            pass
+        resp = self.app.get('/')
+        self.assertIn('download.png', resp.body)
 
     def test_subdir_shows_up(self):
         os.mkdir(os.path.join(self.test_dir, 'somedir'))
