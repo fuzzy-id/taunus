@@ -3,9 +3,7 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       metal:use-macro="base">
   <tal:block metal:fill-slot="body">
-    <div class="data spec">
-      <p id="dirlisting" class="yui3-skin-sam">
-      </p>
+    <div id="dirlisting" class="date yui3-skin-sam">
     </div> <!-- closes data -->
       <script>
 	YUI().use('datatable', function (Y) {
@@ -16,7 +14,7 @@
            ];
 	   var data = [
 	       <tal:block tal:repeat="item listing">
-		 { "action": ["foo", "bar"],
+		 { "action": "<tal:block tal:repeat='feature item.features'><a href='${feature.href}'><img class='icon' src='${feature.icon}'/></a></tal:block>",
 		   "name": "<a href='${item.path}'>${item}</a>", 
 		   "size": ${item.size} },
                </tal:block>

@@ -10,8 +10,7 @@ def view_directory(context, request):
     listing = []
     for entry in context:
         listing.append(entry)
-        entry.features = [ Feature(entry) for Feature in entry.supported_actions ]
-
+        entry.features = [ Feature(request, entry) for Feature in entry.supported_actions ]
 
     resource_lineage = []
     for r in reversed([ c for c in lineage(context) ]):

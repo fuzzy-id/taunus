@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="${request.static_path('taunus:static/all.css')}"/>
     <script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
     <title>Taunus - ${context.path}</title>
+    <style>
+      .icon {
+         height: 15px;
+      }
+    </style>
   </head>
   <body>
     <div class="page">

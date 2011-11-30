@@ -5,8 +5,8 @@ class Downloadable(object):
     
     icon = 'taunus:static/icons/download.png'
 
-    def __init__(self, item):
+    def __init__(self, request, item):
 
         self.href = resource_path(item)
-
+        self.icon = request.static_path(self.icon)
     
