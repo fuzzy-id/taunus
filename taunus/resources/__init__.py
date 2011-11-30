@@ -61,7 +61,7 @@ class Directory(BaseFSObject):
 
     def __iter__(self):
         full_path = self.full_path()
-        listing = os.listdir(full_path)
+        listing = os.listdir(unicode(full_path))
         listing.sort()
         def directory_listing():
             for item in listing:
