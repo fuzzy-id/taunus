@@ -9,8 +9,8 @@
 	YUI().use('datatable', function (Y) {
 	   var cols = [
 	       { key: "action", label: "", abbr: "action", sortable: false },
-	       { key: "name", label: "Name", abbr: "name", sortable: "true" },
-	       { key: "size", label: "Size", abbr: "size", sortable: "true" }
+	       { key: "name", label: "Name", abbr: "name", sortable: true },
+	       { key: "size", label: "Size", abbr: "size", sortable: true }
            ];
 	   var data = [
 	       <tal:block tal:repeat="item listing">
