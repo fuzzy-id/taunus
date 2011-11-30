@@ -19,7 +19,12 @@
 	   var table = new Y.DataTable.Base({
 	       columnset: cols,
 	       recordset: data
-	   }).plug(Y.Plugin.DataTableSort).render("#dirlisting");
+	   }).plug(Y.Plugin.DataTableSort, {
+	       lastSortedBy: {
+	           key: "name",
+	           dir: "asc"
+	           }
+	       }).render("#dirlisting");
 	});
       </script>
   </tal:block>
