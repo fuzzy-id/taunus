@@ -3,15 +3,32 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       metal:use-macro="base">
   <tal:block metal:fill-slot="body">
-    <div class="data spec">
-      <table>
-	<tr> 
-	  <th>File</th>
-	</tr>
-	<tr tal:repeat="item resource">
-	  <td><a href="${item.path}">${item}</a></td>
-	</tr>
-      </table>
+    <div id="dirlisting" class="date yui3-skin-sam">
     </div> <!-- closes data -->
+      <script>
+	YUI().use('datatable', function (Y) {
+	   var cols = [
+	       { key: "action", label: "", abbr: "action", sortable: false },
+	       { key: "name", label: "Name", abbr: "name", sortable: "true" },
+	       { key: "size", label: "Size", abbr: "size", sortable: "true" }
+           ];
+	   var data = [
+	       <tal:block tal:repeat="item listing">
+		 { "action": "<tal:block tal:repeat='feature item.features'><a href='${feature.href}'><img class='icon' src='${feature.icon}'/></a></tal:block>",
+		   "name": "<a href='${item.path}'>${item}</a>", 
+		   "size": ${item.size} },
+               </tal:block>
+	   ];
+	   var table = new Y.DataTable.Base({
+	       columnset: cols,
+	       recordset: data
+	   }).plug(Y.Plugin.DataTableSort, {
+	       lastSortedBy: {
+	           key: "name",
+	           dir: "asc"
+	           }
+	       }).render("#dirlisting");
+	});
+      </script>
   </tal:block>
 </html>

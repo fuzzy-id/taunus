@@ -5,6 +5,7 @@ import re
 import magic
 from pyramid.traversal import resource_path
 
+from taunus.resources import features
 
 class RootDirFactory(object):
     
@@ -33,6 +34,8 @@ class BaseFSObject(object):
     Defines properties and functions that all objects in the
     file system will share.
     """
+    supported_actions = []
+
     def __init__(self, parent, name):
         self.__parent__ = parent
         self.__name__ = name
@@ -46,8 +49,15 @@ class BaseFSObject(object):
     @property
     def path(self):
         return resource_path(self)
+
+    @property
+    def size(self):
+        return os.path.getsize(self.full_path())
+
         
 class Directory(BaseFSObject):
+
+    dotfile_re = re.compile(r'^\..*')
 
     def __iter__(self):
         full_path = self.full_path()
@@ -67,13 +77,21 @@ class Directory(BaseFSObject):
 
     def get_entry_type(self, entry):
         entry_path = os.path.join(self.full_path(), entry)
-        if not is_valid_entry(entry_path):
+        if not self.is_valid_entry(entry_path):
             return None
         elif os.path.isdir(entry_path):
             return Directory
         elif os.path.isfile(entry_path):
             return FileFactory
         return None
+
+    def is_valid_entry(self, entry_path):
+        if os.path.islink(entry_path):
+            return False
+        if self.dotfile_re.match(os.path.basename(entry_path)) is not None:
+            return False
+        return True
+
 
 class RootDirectory(Directory):
 
@@ -105,12 +123,5 @@ class FileFactory(BaseFSObject):
         return f
 
 class StdFile(BaseFSObject):
-    pass
 
-dotfile_re = re.compile(r'^\..*')
-def is_valid_entry(entry_path):
-    if os.path.islink(entry_path):
-        return False
-    if dotfile_re.match(os.path.basename(entry_path)) is not None:
-        return False
-    return True
+    supported_actions = [features.Downloadable, ]
