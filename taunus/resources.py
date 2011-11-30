@@ -33,6 +33,8 @@ class BaseFSObject(object):
     Defines properties and functions that all objects in the
     file system will share.
     """
+    supported_actions = []
+
     def __init__(self, parent, name):
         self.__parent__ = parent
         self.__name__ = name
@@ -50,6 +52,7 @@ class BaseFSObject(object):
     @property
     def size(self):
         return os.path.getsize(self.full_path())
+
         
 class Directory(BaseFSObject):
 

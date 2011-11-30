@@ -7,10 +7,13 @@ from pyramid.view import view_config
 @view_config(context='taunus.resources.Directory',
              renderer='taunus:templates/directory.pt')
 def view_directory(context, request):
-    return {'resource': context,
-            'root_to_resource': [ (r, resource_path(r), )
-                                  for r in reversed(
-                [ c for c in lineage(context) ]) ], }
+    listing = [ entry for entry in context ]
+    resource_lineage = [ 
+        (r, resource_path(r), ) for r in reversed(
+            [ c for c in lineage(context) ]) ] 
+    return {'context': context,
+            'listing': listing,
+            'resource_lineage': resource_lineage, }
 
 @view_config(context='taunus.resources.StdFile')
 def serve_file(context, request):
