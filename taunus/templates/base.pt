@@ -4,8 +4,8 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal">
   <head>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet"
-    href="${request.static_path('taunus:static/all.css')}"/>
+    <link rel="stylesheet" href="${request.static_path('taunus:static/all.css')}"/>
+    <script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
     <title>Taunus - ${resource.path}</title>
   </head>
   <body>
