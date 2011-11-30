@@ -5,6 +5,7 @@ import re
 import magic
 from pyramid.traversal import resource_path
 
+from taunus.resources import features
 
 class RootDirFactory(object):
     
@@ -118,5 +119,5 @@ class FileFactory(BaseFSObject):
         return f
 
 class StdFile(BaseFSObject):
-    pass
 
+    supported_actions = [features.Downloadable, ]
