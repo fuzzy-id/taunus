@@ -49,6 +49,8 @@ class BaseFSObject(object):
         
 class Directory(BaseFSObject):
 
+    dotfile_re = re.compile(r'^\..*')
+
     def __iter__(self):
         full_path = self.full_path()
         listing = os.listdir(full_path)
@@ -67,13 +69,21 @@ class Directory(BaseFSObject):
 
     def get_entry_type(self, entry):
         entry_path = os.path.join(self.full_path(), entry)
-        if not is_valid_entry(entry_path):
+        if not self.is_valid_entry(entry_path):
             return None
         elif os.path.isdir(entry_path):
             return Directory
         elif os.path.isfile(entry_path):
             return FileFactory
         return None
+
+    def is_valid_entry(self, entry_path):
+        if os.path.islink(entry_path):
+            return False
+        if self.dotfile_re.match(os.path.basename(entry_path)) is not None:
+            return False
+        return True
+
 
 class RootDirectory(Directory):
 
@@ -103,10 +113,3 @@ class FileFactory(BaseFSObject):
 class StdFile(BaseFSObject):
     pass
 
-dotfile_re = re.compile(r'^\..*')
-def is_valid_entry(entry_path):
-    if os.path.islink(entry_path):
-        return False
-    if dotfile_re.match(os.path.basename(entry_path)) is not None:
-        return False
-    return True
