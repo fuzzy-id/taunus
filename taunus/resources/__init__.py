@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import ctypes
 import os
 import re
 
@@ -6,6 +7,7 @@ import magic
 from pyramid.traversal import resource_path
 
 from taunus.resources import features
+
 
 class RootDirFactory(object):
     
@@ -106,6 +108,7 @@ class RootDirectory(Directory):
 
     def __str__(self):
         return 'Root'
+
 
 class FileFactory(BaseFSObject):
 
