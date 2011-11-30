@@ -113,7 +113,11 @@ class FileFactory(BaseFSObject):
     video_re = re.compile('^video/')
 
     def __new__(cls, parent, name):
-        mime = magic.from_file(os.path.join(parent.full_path(), name), mime=True)
+        # try except handles the disability of magic to handle unicode files 
+        try:
+            mime = magic.from_file(os.path.join(parent.full_path(), name), mime=True)
+        except ctypes.ArgumentError:
+            mime = "application/octet-stream"
         f = StdFile(parent, name)
         f.mime = mime
         return f
