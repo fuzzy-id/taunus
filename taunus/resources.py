@@ -46,6 +46,10 @@ class BaseFSObject(object):
     @property
     def path(self):
         return resource_path(self)
+
+    @property
+    def size(self):
+        return os.path.getsize(self.full_path())
         
 class Directory(BaseFSObject):
 
