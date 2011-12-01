@@ -6,7 +6,7 @@ import re
 import magic
 from pyramid.traversal import resource_path
 
-from taunus.resources import features
+from taunus.resources import features, entities
 
 
 class RootDirFactory(object):
@@ -44,6 +44,10 @@ class BaseFSObject(object):
 
     def __str__(self):
         return self.__name__
+
+    def __html__(self):
+        "Chameleon calls this when evaluating a template."
+        return ''.join([ entities.chr2entity(c) for c in self.__name__ ])
 
     def full_path(self):
         return '/'.join([self.__parent__.full_path(), self.__name__])
