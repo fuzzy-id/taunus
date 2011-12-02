@@ -39,15 +39,15 @@ class BaseFSObject(object):
     supported_actions = []
 
     def __init__(self, parent, name):
+        """ All objects in a file system should inherit from this one.
+        `parent' is needed for traversal. `name' should be a properly
+        encoded file name ('f&ouml;&ouml;' instead of 'föö').
+        """
         self.__parent__ = parent
         self.__name__ = name
 
     def __str__(self):
         return self.__name__
-
-    def __html__(self):
-        "Chameleon calls this when evaluating a template."
-        return ''.join([ entities.chr2entity(c) for c in self.__name__ ])
 
     def full_path(self):
         return '/'.join([self.__parent__.full_path(), self.__name__])
