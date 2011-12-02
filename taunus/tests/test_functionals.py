@@ -85,7 +85,7 @@ class DirectoryTests(unittest.TestCase):
             pass
         resp = self.app.get('/')
         self.assertIn('>föh<', resp.body)
-        self.assertIn("href='/föh'", resp.body)
+        self.assertIn("href='/f%C3%B6h'", resp.body)
 
     def test_dot_file_is_hidden(self):
         with open(os.path.join(self.test_dir, '.some_dot_file'), 'w'):
