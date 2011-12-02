@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from pyramid.config import Configurator
 from taunus.resources import RootDirFactory
 
