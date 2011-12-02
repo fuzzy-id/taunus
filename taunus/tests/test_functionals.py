@@ -77,13 +77,15 @@ class DirectoryTests(unittest.TestCase):
         with open(os.path.join(self.test_dir, 'foo'), 'w'):
             pass
         resp = self.app.get('/')
-        self.assertIn('foo', resp.body)
+        self.assertIn('>foo<', resp.body)
+        self.assertIn("href='/foo'", resp.body)
 
     def test_file_with_non_ascii_is_listed(self):
         with open(os.path.join(self.test_dir, 'föh'), 'w'):
             pass
         resp = self.app.get('/')
         self.assertIn('f&ouml;h', resp.body)
+        self.assertIn("href='/f&ouml;h'", resp.body)
 
     def test_dot_file_is_hidden(self):
         with open(os.path.join(self.test_dir, '.some_dot_file'), 'w'):
